@@ -1,3 +1,5 @@
+http://www.xavierdupre.fr/blog/2014-02-02_nojs.html
+
 - Utiliser ipython notebook
 - Récupérer les visages sur http://vision.ucsd.edu/~iskwak/ExtYaleDatabase/download.html
 - Utiliser opencv pour détecter les visages avec Adaboost
