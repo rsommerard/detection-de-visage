@@ -11,7 +11,7 @@ def detecte_visages(image, image_out, show = False):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # détection du ou des visages
-    faces = face_model.detectMultiScale(gray, 1.3, 5)
+    faces = face_model.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags = cv2.cv.CV_HAAR_SCALE_IMAGE)
 
     # on place un cadre autour des visages
     print ("nombre de visages", len(faces), "dimension de l'image", img.shape, "image", image)
@@ -32,3 +32,29 @@ if __name__ == "__main__":
         if file.startswith("visage") : continue # déjà traité
         if os.path.splitext(file)[-1].lower() in [".jpg", ".jpeg", ".png" ] :
             detecte_visages (file, "visage_" + file, True)
+
+
+"""import cv2
+import sys
+# Get user supplied values
+imagePath = sys.argv[1]
+cascPath = sys.argv[2]
+# Create the haar cascade
+faceCascade = cv2.CascadeClassifier(cascPath)
+# Read the image
+image = cv2.imread(imagePath)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Detect faces in the image
+faces = faceCascade.detectMultiScale(
+gray,
+scaleFactor=1.1,
+minNeighbors=5,
+minSize=(30, 30),
+flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+)
+print "Found {0} faces!".format(len(faces))
+# Draw a rectangle around the faces
+for (x, y, w, h) in faces:
+  cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+  cv2.imshow("Faces found", image)
+  cv2.waitKey(0)"""
