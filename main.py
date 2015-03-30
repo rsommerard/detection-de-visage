@@ -8,9 +8,10 @@ def detecte_visages(image, image_out, show = False):
     # on charge le modèle de détection des visages
     face_model = cv2.CascadeClassifier("opencv/data/haarcascades/haarcascade_frontalface_alt2.xml")
 
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # détection du ou des visages
-    faces = face_model.detectMultiScale(img)
+    faces = face_model.detectMultiScale(gray, 1.3, 5)
 
     # on place un cadre autour des visages
     print ("nombre de visages", len(faces), "dimension de l'image", img.shape, "image", image)
