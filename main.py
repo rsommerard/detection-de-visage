@@ -12,8 +12,8 @@ import numpy
 ###########################
 
 CASC_PATH = 'haarcascade_frontalface_default.xml'
-IMAGES_PATH = 'yalefaces/'
-EIGENFACES_PATH = 'yaleeigenfaces/'
+IMAGES_PATH = 'faces/'
+EIGENFACES_PATH = 'eigenfaces/'
 
 faceCascade = cv2.CascadeClassifier(CASC_PATH)
 
@@ -52,10 +52,12 @@ print('-' * 80)
 # Création du csv pour le Classifier #
 ######################################
 
-label = 0
-
+CSV_FILE = 'faces.csv'
 SEPARATOR = ";"
-FACES_FOLDER = "yalefaces/"
+FACES_FOLDER = "faces/"
+
+label = 0
+content = ''
 
 for dirname, dirnames, filenames in os.walk(FACES_FOLDER):
     if dirname == '.DS_Store':
@@ -70,17 +72,16 @@ for dirname, dirnames, filenames in os.walk(FACES_FOLDER):
             if filename == '.DS_Store':
                 continue
             abs_path = "%s/%s" % (subject_path, filename)
-            print "%s%s%s" % (abs_path, SEPARATOR, label)
+            content += "%s%s%s\n" % (abs_path, SEPARATOR, label)
 
         label += 1
 
-print('-' * 80)
+with open(CSV_FILE, 'w') as file:
+    file.write(content)
 
 ########################################
 # Apprentissage et prédiction du sujet #
 ########################################
-
-CSV_FILE = 'faces.csv'
 
 with open(CSV_FILE, 'r') as file:
     csv = file.readlines()
