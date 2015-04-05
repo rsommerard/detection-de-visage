@@ -56,12 +56,14 @@ CSV_FILE = 'faces.csv'
 SEPARATOR = ";"
 FACES_FOLDER = "faces/"
 
-label = 0
+label = ''
 content = ''
 
 for dirname, dirnames, filenames in os.walk(FACES_FOLDER):
     if dirname == '.DS_Store':
         continue
+
+    print('>>>' + dirname)
 
     for subdirname in dirnames:
         if subdirname == '.DS_Store':
@@ -73,8 +75,6 @@ for dirname, dirnames, filenames in os.walk(FACES_FOLDER):
                 continue
             abs_path = "%s/%s" % (subject_path, filename)
             content += "%s%s%s\n" % (abs_path, SEPARATOR, label)
-
-        label += 1
 
 with open(CSV_FILE, 'w') as file:
     file.write(content)
